@@ -1,0 +1,79 @@
+.container {
+  overflow: hidden;
+}
+
+.side-bar {
+  background-color: black;
+  min-width: 200px;
+}
+
+@media only screen and (min-width: 768px) {
+  .side-bar {
+    min-height: 100vh;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar-nav {
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    -webkit-justify-content: space-evenly;
+    justify-content: space-evenly;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .navbar,
+  .navbar-brand {
+    position: fixed;
+    z-index: 1030;
+    left: 0;
+    right: 0;
+    background: Black;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* moves the nav options to the bottom of the screen on mobile */
+  .navbar {
+    bottom: 0;
+    padding-bottom: 50px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  /* keep site title at the top of the screen on mobile */
+  .navbar-brand {
+    top: 0;
+    padding-top: 10px;
+    position:fixed;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "GT America", Helvetica, Verdana, sans-serif;
+}
+
+.input-group {
+  max-width: 400px;
+}
+
+.form-body {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 767px) {
+.form-body{
+  padding-top: 65px;
+  margin: 0 auto;
+}
+}
