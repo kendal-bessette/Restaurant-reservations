@@ -4,18 +4,18 @@ import { clearTable } from "../utils/api";
 
 const ListTables = ({ table }) => {
     const history = useHistory(); 
-
-async function handleFinish(e) {
-    e.preventDefault()
-    if(window.confirm(
-    'Is this table ready to seat new guests? This cannot be undone.'
-    )){
+ 
+    const handleFinish = async(event) => {
+      event.preventDefault()
+  
+      if(window.confirm(
+        'Is this table ready to seat new guests? This cannot be undone.'
+      )){
         clearTable(table.table_id).then(() => {
-            history.push('/')
-        })
-        .catch((err) => console.error(err)); 
+          history.push('/')
+        }).catch((err) => console.error(err));
+      }
     }
-};
 
     return ( 
         <>

@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import formatDate from "../utils/formatDate";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
+import { cancelReservation } from "../utils/api";
 
 const ListReservations = ({ reservation }) => {
   const resDate = formatDate(reservation.reservation_date);
+  const [reservationsError, setReservationsError] = useState(null)
+  const history = useHistory();
+
+  async function handleCancel(e){
+    try{
+      if(window.confirm("Do you want to cancel this reservation?")){
+        await cancelReservation(reservation.reservation_id);
+        history.go(0);
+      } 
+    } catch(error) {
+      setReservationsError(error)
+    }
+  }
+  if(reservation.status === 'cancelled') { 
+    return null;
+  }
 
   return (
     <div className="card text-center">
@@ -28,7 +46,8 @@ const ListReservations = ({ reservation }) => {
         {reservation.status === "seated" ? null : 
             <Link to={`/reservations/${reservation.reservation_id}/seat`} className="btn btn-success oi oi-arrow-thick-bottom">Seat</Link>
           }
-          <Link to={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-secondary ml-1 oi oi-pencil"> Edit</Link>       
+          <Link to={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-secondary ml-1 oi oi-pencil"> Edit</Link>
+          <button data-reservation-id-cancel={reservation.reservation_id} onClick={handleCancel} className="btn btn-danger ml-1 oi oi-trash"> Cancel</button>
         </div>
       </div>
     </div>

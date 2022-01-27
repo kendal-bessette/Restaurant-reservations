@@ -139,7 +139,7 @@ const clearTable = async(req, res, next) => {
     await ReservationService.updateStatus(table.reservation_id, "finished")
     
     res.status(200).json({ data: clearedTable });
-}
+}; 
 
 module.exports = {
     list: [asyncErrorBoundary(list)],

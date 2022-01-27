@@ -34,12 +34,12 @@ const SeatTable = () => {
     }, [reservation_id])
     
     
-    const formChange = (event) => {
-        setFormData(event.target.value)
+    function formChange(e) {
+        setFormData(e.target.value)
     }
     
-    const formSubmit = async(event) => {
-        event.preventDefault();
+    async function formSubmit(e) {
+        e.preventDefault();
         try {
             if(formData === "Please select a table") throw new Error("Please Select a table")
             await updateTable(formData, {data: {reservation_id} })
@@ -48,10 +48,11 @@ const SeatTable = () => {
             setTablesError(error)
         }
     }
-    const handleCancel = () => {
+
+    function handleCancel(){
         setFormData("Please Select a Table");
         history.goBack();
-    }
+    }; 
 
     return ( 
         <>
