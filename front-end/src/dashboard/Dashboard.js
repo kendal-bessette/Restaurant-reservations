@@ -74,6 +74,7 @@ function Dashboard({ today }) {
         ))}
         </div>
         <div className="card-group">
+          
         {!tables ? <h4>Loading...</h4>
         :
         tables.map((table) => (

@@ -22,9 +22,11 @@ const ListReservations = ({ reservation }) => {
         </p>
         <p className="card-title">Mobile Number: {reservation.mobile_number}</p>
         <p className="card-title">Number People: {reservation.people}</p>
+        <p className="card-title" data-reservation-id-status={reservation.reservation_id}>Status {reservation.status}</p>
         <div className="btn-group" role="group" aria-label="Basic example">
-        {reservation.status=== "seated" ? null :
-            <Link to={`/reservations/${reservation.reservation_id}/seat`} className="btn btn-success oi oi-arrow-thick-bottom"> Seat </Link>
+        
+        {reservation.status === "seated" ? null : 
+            <Link to={`/reservations/${reservation.reservation_id}/seat`} className="btn btn-success oi oi-arrow-thick-bottom">Seat</Link>
           }
           <Link to={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-secondary ml-1 oi oi-pencil"> Edit</Link>       
         </div>

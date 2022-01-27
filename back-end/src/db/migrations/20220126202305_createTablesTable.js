@@ -3,7 +3,7 @@ exports.up = async function(knex) {
         table.increments("table_id").primary();
         table.string("table_name").notNullable();
         table.integer("capacity").notNullable();
-        table.boolean('occupied');
+        table.boolean('occupied').notNullable().defaultTo(false)
         table.integer('reservation_id')
         table
           .foreign('reservation_id')
@@ -16,4 +16,3 @@ exports.up = async function(knex) {
   exports.down = async function(knex) {
     return knex.schema.dropTable("tables");
   };
-  

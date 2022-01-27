@@ -29,9 +29,9 @@ const update = (tableId, reservation_id) => {
 const clearTable = (tableId) => {
     return knex("tables")
     .where("table_id", tableId)
-    .update({reservation_id: null, occupied: false})
+    .update({reservation_id: null, occupied:false})
     .returning("*")
-}
+};
 
 module.exports = {
     list,
