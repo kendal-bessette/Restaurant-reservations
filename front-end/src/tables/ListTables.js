@@ -1,20 +1,38 @@
-import React from "react";
+import React, { useState,useEffect } from "react";
 import { useHistory } from "react-router";
-import { clearTable } from "../utils/api";
+import { clearTable,updateReservationStatus,deleteReservationId } from "../utils/api";
 
 const ListTables = ({ table }) => {
     const history = useHistory(); 
- 
-    const handleFinish = async(event) => {
-      event.preventDefault()
-  
-      if(window.confirm(
-        'Is this table ready to seat new guests? This cannot be undone.'
-      )){
-        clearTable(table.table_id).then(() => {
-          history.push('/')
-        }).catch((err) => console.error(err));
+    const [currentTable, setCurrentTable] = useState(table);
+    const [tableStatus, setTableStatus] = useState("Free");
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      if (currentTable.reservation_id) {
+          setTableStatus(`Occupied by reservation ID: ${currentTable.reservation_id}`);
+      } else {
+          setTableStatus("Free");
       }
+  }, [currentTable]);
+
+  
+      const handleFinish = (e) => {
+        e.preventDefault();
+        setError(null);
+        const confirmBox = window.confirm(
+            "Is this table ready to seat new guests? This cannot be undone."
+        );
+        if (confirmBox === true) {
+            updateReservationStatus({ status: "finished" }, currentTable.reservation_id)
+            .catch(setError);
+            deleteReservationId(currentTable.table_id)
+            .then((response) => {
+                setCurrentTable(response)
+                history.go(0);
+            })
+            .catch(setError);
+        }
     }
 
     return ( 
@@ -28,17 +46,25 @@ const ListTables = ({ table }) => {
           {table.table_name}
         </p>
         <p className="card-title">Capacity: {table.capacity}</p>
-        {table.occupied ?
+        {table.reservation_id ?
             <>
               <div>
-                <h6 data-table-id-status={table.table_id} className="btn btn-dark"><span className="oi oi-people" /> occupied</h6>
+                <h6 data-table-id-status={table.table_id} 
+                className="btn btn-dark">
+                  occupied
+                </h6>
               </div>
-              <button data-table-id-finish={table.table_id} onClick={(e)=>handleFinish(e)} className='btn btn-danger ml-2 px-2 oi oi-check'> Finish </button>
+              <button 
+              data-table-id-finish={table.table_id} 
+              data-reservation-id-finish={table.reservation_id}
+              type="button"
+              onClick={(e)=>handleFinish(e)} 
+              className='btn btn-danger ml-2 px-2 oi oi-check'> 
+              Finish
+              </button>
             </>
-                : 
-            <>
-                <h6 data-table-id-status={table.table_id} className="btn btn-success oi oi-check"> free </h6>
-            </>}
+                : ("")
+              }
         </div>
       </div>
             </>

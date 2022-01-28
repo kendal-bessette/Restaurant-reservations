@@ -9,12 +9,10 @@ import ReservationForm from "./ReservationForm";
 
 
 export default function EditReservation(){
-
    const history = useHistory();
    const {reservation_id} = useParams();
    const [oldReservation, setOldReservation] = useState({})
    const [reservationsError, setReservationsError] = useState(null)
-   
    useEffect(() => {
        const getReservation = async() => {
            const abortController = new AbortController();
@@ -27,13 +25,13 @@ export default function EditReservation(){
        getReservation();
    }, [reservation_id]);
    
-   const peopleFormChange = ({ target }) => {
+   const peopleChangeForm = ({ target }) => {
     setOldReservation({...oldReservation, [target.name]: parseInt(target.value,10) });
 }
-    const formChange = ({ target }) => {
+    const changeForm = ({ target }) => {
         setOldReservation({...oldReservation, [target.name]: target.value});
     }
-    const formSubmit = async(event) => {
+    const submitForm = async(event) => {
         event.preventDefault();
         setOldReservation({...oldReservation});
         try {
@@ -49,7 +47,7 @@ export default function EditReservation(){
        <>
        <h2>Edit Reservation</h2>
        <ErrorAlert error={reservationsError} />
-       <ReservationForm reservation={oldReservation} formChange={formChange} formSubmit={formSubmit} peopleFormChange={peopleFormChange} />
+       <ReservationForm reservation={oldReservation} changeForm={changeForm} submitForm={submitForm} peopleChangeForm={peopleChangeForm} />
        </>
    )
 }

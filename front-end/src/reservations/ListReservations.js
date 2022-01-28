@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import formatDate from "../utils/formatDate";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router";
+import { Link, useHistory } from "react-router-dom"
 import { cancelReservation } from "../utils/api";
 
 const ListReservations = ({ reservation }) => {
@@ -9,7 +8,7 @@ const ListReservations = ({ reservation }) => {
   const [reservationsError, setReservationsError] = useState(null)
   const history = useHistory();
 
-  async function handleCancel(e){
+  const handleCancel = async(event) => {
     try{
       if(window.confirm("Do you want to cancel this reservation?")){
         await cancelReservation(reservation.reservation_id);
