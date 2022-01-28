@@ -14,13 +14,6 @@ const NewTable = () => {
 
   const [table, setTable] = useState({ ...initialFormState });
 
-  // async function submitForm(e) {
-  //   e.preventDefault();
-  //   await createTable(table);
-  //   setTable({ ...initialFormState });
-  //   history.push("/dashboard");
-  // }
-
   async function submitForm(e) {
     e.preventDefault(); 
     createTable({ ...table }); 

@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom';
 const ReservationForm = ({ submitForm, reservation, changeForm, peopleChangeForm }) => {
   const history = useHistory(); 
 
-  
-  
+
     return (
 <div className="text-center input-group form-body">
 <form onSubmit={submitForm} className='card p-4 bg-light mt-5'>
