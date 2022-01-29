@@ -94,15 +94,17 @@
  }
  
  export async function createTable(table, signal){
-   const url = new URL(`${API_BASE_URL}/tables`);
-   const options = {
-     method: "POST",
-     headers,
-     body: JSON.stringify({ data: table }),
-     signal,
-   };
-   return await fetchJson(url, options, table);
- }
+  const url = new URL(`${API_BASE_URL}/tables`);
+  const options = {
+    method: "POST",
+    headers,
+    body: JSON.stringify({ data: table }),
+    signal,
+  };
+  return await fetchJson(url, options, table);
+}
+
+
  
  export async function updateTable(table_id, reservation_id) {
    return await axios.put(
@@ -163,6 +165,17 @@
     method: "PUT",
     headers,
     body: JSON.stringify({ data: { reservation_id } }),
+    signal,
+  };
+  return await fetchJson(url, options);
+}
+
+export async function deleteTable(table_id, signal) {
+  const url = `${API_BASE_URL}/tables`;
+  const options = {
+    method: "DELETE",
+    headers,
+    body: JSON.stringify({ data: {table_id} }),
     signal,
   };
   return await fetchJson(url, options);

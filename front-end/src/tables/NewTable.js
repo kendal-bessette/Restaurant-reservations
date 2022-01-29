@@ -1,87 +1,73 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { createTable } from "../utils/api";
 
-const NewTable = () => {
+function NewTable() {
   const history = useHistory();
+  const [table_name, setTable_name] = useState("");
+  const [capacity, setCapacity] = useState("");
+  const [error, setError] = useState(null);
 
-  const initialFormState = {
-    table_name: "",
-    capacity: "0",
-    occupied: false,
-    reservation_id: null,
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError(null);
+    const table = {
+      table_name,
+      capacity,
+    };
+    createTable(table)
+      .then(() => {
+        history.push("/dashboard");
+      })
+      .catch(setError);
   };
 
-  const [table, setTable] = useState({ ...initialFormState });
-
-  async function submitForm(e) {
-    e.preventDefault(); 
-    createTable({ ...table }); 
-    try {
-        await createTable(table); 
-        history.push(`/dashboard`)
-    } catch (err) {
-        console.err(err)
-    }
-}; 
-
-  const changeForm = ({ target }) => {
-    setTable({ ...table, [target.name]: target.value });
+  const handleCancel = (e) => {
+    e.preventDefault();
+    history.goBack();
   };
 
   return (
-    <>
-      <div>
-        <div>
-          <h2>Create Table</h2>
-        </div>
-        <form onSubmit={submitForm}>
-          <div className="mb-3">
-            <label htmlFor="table_name" className="form-label">
-              Table Name
-            </label>
-            <input
-              type="text"
-              name="table_name"
-              className="form-control"
-              placeholder="Table Name"
-              id="table_name"
-              value={table.table_name}
-              onChange={changeForm}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="table_capacity" className="form-label">
-              Capacity
-            </label>
-            <input
-              type="number"
-              name="capacity"
-              className="form-control"
-              placeholder="Capacity"
-              id="capacity_name"
-              required
-              min="1"
-              value={table.capacity}
-              onChange={changeForm}
-            />
-          </div>
+    <div>
+      <h3 className="d-flex m-3 justify-content-center">New Table Form</h3>
 
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-          <button
-            type="cancel"
-            className="btn btn-danger"
-            onClick={() => history.goBack()}
-          >
-            Cancel
-          </button>
+      <div>
+        <form className="form-group" onSubmit={handleSubmit}>
+          <label>Table Name:</label>
+          <br />
+          <input
+            name="table_name"
+            type="text"
+            required
+            onChange={(e) => setTable_name(e.target.value)}
+            value={table_name}
+            className="form-control"
+          />
+          <br />
+          <label>Table Capacity:</label>
+          <br />
+          <input
+            name="capacity"
+            type="number"
+            required
+            onChange={(e) => setCapacity(e.target.valueAsNumber)}
+            value={capacity}
+            className="form-control"
+          />
+          <br />
+
+          <div className="d-flex justify-content-around">
+            <button className="btn btn-primary" type="submit">
+              SUBMIT
+            </button>
+            <button className="btn btn-danger" onClick={handleCancel}>
+              CANCEL
+            </button>
+          </div>
         </form>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default NewTable;

@@ -74,27 +74,16 @@ const tableIsValid = (req, res, next) => {
       next();
   }
 
-const capacityIsValid = (req,res, next) => {
-      const { data: {capacity} } = req.body;
-      if(!capacity) {
-        return next({
-            status:400,
-            message: 'capacity is missing'
-        })
-      }
-      next();
-  }; 
-
-// const capacityIsNumber = (req, res, next) => {
-//     const { data: {capacity} } = req.body; 
-//     if (typeof(capacit) !== 'number') {
-//         return ({
-//             status:400,
-//             message: 'capacity is not a number'
-//         })
-//     }
-//     next();
-// }; 
+    const capacityIsValid = (req,res, next) => {
+        const { data: {capacity} } = req.body;
+        if(!capacity || !Number.isInteger(capacity)) {
+          return next({
+              status:400,
+              message: 'capacity is missing'
+          })
+        }
+        next();
+    }
 
 async function read(req, res) {
     const { table } = res.locals;
@@ -145,7 +134,6 @@ module.exports = {
     list: [asyncErrorBoundary(list)],
     create: [asyncErrorBoundary(tableIsValid),
             asyncErrorBoundary(capacityIsValid),
-            // asyncErrorBoundary(capacityIsNumber), 
             asyncErrorBoundary(tableNameIsValid),
             asyncErrorBoundary(create)],
     update: [asyncErrorBoundary(tableIsValid),
