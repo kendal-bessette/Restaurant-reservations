@@ -5,7 +5,6 @@ import useQuery from "../utils/useQuery";
 import { previous, next } from "../utils/date-time";
 import ListReservations from "../reservations/ListReservations";
 import ListTables from "../tables/ListTables";
-import {  } from "react-icons/fa";
 import { formatDate } from "../utils/date-time";
 
 
