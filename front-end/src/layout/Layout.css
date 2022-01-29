@@ -2,9 +2,35 @@
   overflow: hidden;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+select {
+  font-family: "Gill Sans", sans-serif;;
+}
+
 .side-bar {
   background-color: black;
   min-width: 200px;
+}
+
+
+.form-body {
+  max-width: 500px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 767px) {
+.form-body{
+  padding-top: 65px;
+  margin: 0 auto;
+}
 }
 
 @media only screen and (min-width: 768px) {
@@ -51,29 +77,4 @@
     padding-top: 10px;
     position:fixed;
   }
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "GT America", Helvetica, Verdana, sans-serif;
-}
-
-.input-group {
-  max-width: 400px;
-}
-
-.form-body {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-@media only screen and (max-width: 767px) {
-.form-body{
-  padding-top: 65px;
-  margin: 0 auto;
-}
 }

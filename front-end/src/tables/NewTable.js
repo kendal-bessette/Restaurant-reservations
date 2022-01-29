@@ -6,11 +6,11 @@ function NewTable() {
   const history = useHistory();
   const [table_name, setTable_name] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [error, setError] = useState(null);
+  const [newError, setNewError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
-    setError(null);
+    setNewError(null);
     const table = {
       table_name,
       capacity,
@@ -19,20 +19,20 @@ function NewTable() {
       .then(() => {
         history.push("/dashboard");
       })
-      .catch(setError);
+      .catch(setNewError);
   };
 
-  const handleCancel = (e) => {
+  const cancelHandler = (e) => {
     e.preventDefault();
     history.goBack();
   };
 
   return (
     <div>
-      <h3 className="d-flex m-3 justify-content-center">New Table Form</h3>
-
+      <div className="text-center input-group form-body">
       <div>
-        <form className="form-group" onSubmit={handleSubmit}>
+        <form className="form-group" onSubmit={submitHandler} className='card p-4 bg-light mt-5'>
+        <h3 className="d-flex m-3 justify-content-center">New Table</h3>
           <label>Table Name:</label>
           <br />
           <input
@@ -58,14 +58,15 @@ function NewTable() {
 
           <div className="d-flex justify-content-around">
             <button className="btn btn-primary" type="submit">
-              SUBMIT
+              Submit
             </button>
-            <button className="btn btn-danger" onClick={handleCancel}>
-              CANCEL
+            <button className="btn btn-danger" onClick={cancelHandler}>
+              Cancel
             </button>
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }

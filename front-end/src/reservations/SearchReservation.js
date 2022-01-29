@@ -31,14 +31,17 @@ const SearchReservation = () => {
 
   return (
     <>
-      <h1 className="text-center">Search For Reservation</h1>
       <ErrorAlert error={reservationsError} />
-      <div className="d-flex flex-column align-items-center">
+      <div className="text-center input-group form-body">
         <form
           onSubmit={handleSearch}
-          className="mt-5 text-center"
-          style={{ width: "48rem" }}
+          className="card p-4 bg-light mt-5"
+          style={{ width: "30rem" }}
         >
+                <div>
+    <h2>Search for Reservation</h2>
+    </div>
+          <div>
           <input
             className="form-control"
             name="mobile_number"
@@ -46,9 +49,11 @@ const SearchReservation = () => {
             onChange={formChange}
             required
           />
-          <button className="mt-2 oi oi-magnifying-glass" type="submit">
+
+          </div>
+          <button className="btn btn-primary mt-3 mr-3" type="submit">
             {" "}
-            Find{" "}
+            Find Reservation{" "}
           </button>
         </form>
       </div>

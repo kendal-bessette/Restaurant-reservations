@@ -60,6 +60,7 @@ const SeatTable = () => {
         <form onSubmit={formSubmit} className="d-flex flex-column justify-content-center">
             <label htmlFor="table_id">
                 <select 
+                    className="select-menu m-2 p-2 bg-light"
                     id="table_id"
                     name="table_id"
                     onChange={formChange}

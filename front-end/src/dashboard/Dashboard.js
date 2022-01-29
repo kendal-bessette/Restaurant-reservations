@@ -5,6 +5,10 @@ import useQuery from "../utils/useQuery";
 import { previous, next } from "../utils/date-time";
 import ListReservations from "../reservations/ListReservations";
 import ListTables from "../tables/ListTables";
+import {  } from "react-icons/fa";
+import { formatDate } from "../utils/date-time";
+
+
 /**
  * Defines the dashboard page.
  * @param date
@@ -41,40 +45,33 @@ function Dashboard({ today }) {
 
   return (
     <main>
-      <h1>Dashboard</h1>
+      <h1 className="pt-4">Dashboard</h1>
       <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date:</h4>
+        <h4 className="mb-0">Reservations for: {formatDate(date)}</h4>
       </div>
       <div>
-        <h6> {date}</h6>
-      </div>
-      <div>
-        <div className="btn-group" role="group" aria-label="Basic outlined example">
-          <button type="button" className="btn btn-outline-primary" onClick={handlePrev}>
+      <div className="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+          <button type="button" className="btn btn-primary m-2" onClick={handlePrev}>
             Previous Day
           </button>
-          <button type="button" className="btn btn-outline-primary" onClick={handleToday}>
+          <button type="button" className="btn btn-primary m-2" onClick={handleToday}>
             Today
           </button>
-          <button type="button" className="btn btn-outline-primary" onClick={handleTomorrow}>
+          <button type="button" className="btn btn-primary m-2" onClick={handleTomorrow}>
             Next Day
           </button>
-          {/* <div>
-          <input type="date" className="form-control" value={date} />  
-          </div>       */}
-          </div>
+      </div>
       </div>
       <ErrorAlert error={reservationsError} />
       {/* {JSON.stringify(reservations)} */}
-      <div className="card-group">
+      <div className="card-group mt-4">
         {!reservations ? <h4>Loading...</h4>
         :
         reservations.map((reservation) => (
           <ListReservations key={reservation.reservation_id} reservation={reservation} />
         ))}
         </div>
-        <div className="card-group">
-          
+        <div className="card-group mt-5">
         {!tables ? <h4>Loading...</h4>
         :
         tables.map((table) => (
