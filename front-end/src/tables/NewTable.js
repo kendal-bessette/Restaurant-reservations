@@ -29,44 +29,47 @@ function NewTable() {
 
   return (
     <div>
+      <h1 className="d-flex m-3 justify-content-center">New Table</h1>
       <div className="text-center input-group form-body">
-      <div>
-        <form className="form-group" onSubmit={submitHandler} className='card p-4 bg-light mt-5'>
-        <h3 className="d-flex m-3 justify-content-center">New Table</h3>
-          <label>Table Name:</label>
-          <br />
-          <input
-            name="table_name"
-            type="text"
-            required
-            onChange={(e) => setTable_name(e.target.value)}
-            value={table_name}
-            className="form-control"
-          />
-          <br />
-          <label>Table Capacity:</label>
-          <br />
-          <input
-            name="capacity"
-            type="number"
-            required
-            onChange={(e) => setCapacity(e.target.valueAsNumber)}
-            value={capacity}
-            className="form-control"
-          />
-          <br />
+        <div>
+          <form
+            className="form-group card p-4 bg-light mt-5"
+            onSubmit={submitHandler}
+          >
+            <label>Table Name:</label>
+            <br />
+            <input
+              name="table_name"
+              type="text"
+              required
+              onChange={(e) => setTable_name(e.target.value)}
+              value={table_name}
+              className="form-control"
+            />
+            <br />
+            <label>Table Capacity:</label>
+            <br />
+            <input
+              name="capacity"
+              type="number"
+              required
+              onChange={(e) => setCapacity(e.target.valueAsNumber)}
+              value={capacity}
+              className="form-control"
+            />
+            <br />
 
-          <div className="d-flex justify-content-around">
-            <button className="btn btn-primary" type="submit">
-              Submit
-            </button>
-            <button className="btn btn-danger" onClick={cancelHandler}>
-              Cancel
-            </button>
-          </div>
-        </form>
+            <div className="d-flex justify-content-around">
+              <button className="btn btn-primary" type="submit">
+                Submit
+              </button>
+              <button className="btn btn-danger" onClick={cancelHandler}>
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
   );
 }

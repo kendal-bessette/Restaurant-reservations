@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router";
 import { listTables, readReservation, updateTable } from "../utils/api"
 import ErrorAlert  from "../layout/ErrorAlert"
-import ListReservations from "../reservations/ListReservations";
 import formatReservationDate from "../utils/format-reservation-date";
+import { formatDate,formatTime } from "../utils/date-time";
 
 
 const SeatTable = () => {
@@ -60,7 +60,7 @@ const SeatTable = () => {
         <form onSubmit={formSubmit} className="d-flex flex-column justify-content-center">
             <label htmlFor="table_id">
                 <select 
-                    className="select-menu m-2 p-2 bg-light"
+                    className="select-menu m-2 p-2"
                     id="table_id"
                     name="table_id"
                     onChange={formChange}
@@ -79,7 +79,30 @@ const SeatTable = () => {
         </form>
         
         {reservation.reservation_id && (
-          <ListReservations reservation={reservation} />
+            <div className="card text-center m-2 border" style={{ maxWidth: "50rem"}}>
+            <div className="card-header">
+              <h5>
+                {reservation.first_name} {reservation.last_name}, Party of {reservation.people}
+              </h5>
+            </div>
+            <div className="card-body">
+              <p className="card-title">
+                Name: {reservation.first_name} {reservation.last_name}
+              </p>
+              <p className="card-title">
+              <span class="oi oi-calendar mr-1"></span> Date: {formatDate(reservation.reservation_date)}</p>
+              <p className="card-title"><span class="oi oi-clock mr-1"></span>
+                Reservation Time: {formatTime(reservation.reservation_time)}
+              </p>
+              <p className="card-title">
+              <span class="oi oi-phone mr-1"></span>Mobile Number: {reservation.mobile_number}</p>
+              <p className="card-title">
+              <span class="oi oi-people mr-1"></span>Number People: {reservation.people}</p>
+              <p className="card-title" data-reservation-id-status={reservation.reservation_id}>Status: {reservation.status}</p>
+              <div className="btn-group" role="group" aria-label="Basic example">
+        </div>
+        </div>
+        </div>
         )}
         </div>
         <ErrorAlert error={tablesError}/>

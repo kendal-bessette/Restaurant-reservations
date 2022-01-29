@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { deleteTable, clearTable } from "../utils/api";
+import { clearTable } from "../utils/api";
 
 const ListTables = ({ table }) => {
   const history = useHistory();
   const [currentTable, setCurrentTable] = useState(table);
   const [tableStatus, setTableStatus] = useState("free");
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (currentTable.reservation_id) {
@@ -34,49 +33,34 @@ const ListTables = ({ table }) => {
     }
   };
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    setError(null);
-    const confirmBox = window.confirm(
-      "Are you sure you want to delete this table? This cannot be undone."
-    );
-    if (confirmBox === true) {
-      deleteTable(currentTable.table_id).catch(setError);
-      history.go(0);
-    }
-  };
-
-  const handleCancel = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <>
       <div className="d-flex flex-column align-items-center"></div>
       <div className="col">
         <div
-          className="card text-center text-white bg-secondary ml-2"
-          style={{ maxWidth: "18rem" }}
+          className="card text-center ml-2"
+          style={{ maxWidth: "20rem", minHeight:"14rem", maxHeight: "14rem" }}
         >
+          <h4 className="card-header">{table.table_name}</h4>
           <div className="card-body">
-            <h4 className="card-title">Table: {table.table_name}</h4>
             <p className="card-text">
-              Capacity - <span className="oi oi-people" /> {table.capacity}
+              Capacity: <span className="oi oi-people" /> {table.capacity}
             </p>
             {table.occupied ? (
               <>
                 <div>
-                  <h6
+                  <h4
                     data-table-id-status={table.table_id}
-                    className="btn btn-dark"
+                    className="badge badge-pill badge-warning"
+                    style={{ fontSize: "1.2rem" }}
                   >
-                    <span className="oi oi-people" /> occupied
-                  </h6>
+                    Occupied
+                  </h4>
                 </div>
                 <button
                   data-table-id-finish={table.table_id}
                   onClick={(e) => handleFinish(e)}
-                  className="btn btn-danger ml-2 px-2 oi oi-check"
+                  className="btn btn-danger ml-2 mt-1"
                 >
                   {" "}
                   Finish{" "}
@@ -84,13 +68,14 @@ const ListTables = ({ table }) => {
               </>
             ) : (
               <>
-                <h6
+                <h4
                   data-table-id-status={table.table_id}
-                  className="btn btn-success oi oi-check"
+                  className="badge badge-pill badge-success"
+                  style={{ fontSize: "1.2rem" }}
                 >
                   {" "}
-                  free{" "}
-                </h6>
+                  Free{" "}
+                </h4>
               </>
             )}
           </div>

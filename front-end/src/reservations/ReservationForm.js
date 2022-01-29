@@ -6,10 +6,10 @@ const ReservationForm = ({ submitForm, reservation, changeForm, peopleChangeForm
 
 
     return (
+   <div>   
 <div className="text-center input-group form-body">
 <form onSubmit={submitForm} className='card p-4 bg-light mt-5'>
   <div>
-    <h2>Create Reservation</h2>
   </div>
   <div className="mb-3">
     <label htmlFor="first_name" className="form-label">First Name</label>
@@ -87,6 +87,7 @@ const ReservationForm = ({ submitForm, reservation, changeForm, peopleChangeForm
 <button type="cancel" className="btn btn-danger mt-3 mr-3" onClick={() => history.goBack()}>Cancel</button>
 </div>
 </form>
+</div>
 </div>
 
     );

@@ -42,7 +42,7 @@ const NewReservation = () => {
     return ( 
         <div>
             <ErrorAlert error={reservationError} />
-
+            <h1 className="pt-4 text-center">Create Reservation</h1>
             <ReservationForm
                 submitForm={submitForm}
                 reservation={newRes}

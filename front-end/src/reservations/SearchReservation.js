@@ -32,6 +32,7 @@ const SearchReservation = () => {
   return (
     <>
       <ErrorAlert error={reservationsError} />
+      <h1 className="pt-4 text-center">Search For Reservation</h1>
       <div className="text-center input-group form-body">
         <form
           onSubmit={handleSearch}
@@ -39,7 +40,6 @@ const SearchReservation = () => {
           style={{ width: "30rem" }}
         >
                 <div>
-    <h2>Search for Reservation</h2>
     </div>
           <div>
           <input

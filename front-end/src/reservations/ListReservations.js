@@ -23,7 +23,7 @@ const ListReservations = ({ reservation }) => {
   }
 
   return (
-    <div className="card text-center">
+    <div className="card text-center m-2 border" style={{ maxWidth: "50rem"}}>
       <div className="card-header">
         <h5>
           {reservation.first_name} {reservation.last_name}, Party of {reservation.people}
@@ -33,22 +33,22 @@ const ListReservations = ({ reservation }) => {
         <p className="card-title">
           Name: {reservation.first_name} {reservation.last_name}
         </p>
-        <p className="card-title">Reservation Date: {resDate}</p>
         <p className="card-title">
+        <span className="oi oi-calendar mr-1" /> Date: {resDate}</p>
+        <p className="card-title"><span className="oi oi-clock mr-1" />
           Reservation Time: {formatTime(reservation.reservation_time)}
         </p>
-        <p className="card-title">Mobile Number: {reservation.mobile_number}</p>
-        <p className="card-title">Number People: {reservation.people}</p>
+        <p className="card-title">
+        <span className="oi oi-phone mr-1" />Mobile Number: {reservation.mobile_number}</p>
+        <p className="card-title">
+        <span className="oi oi-people mr-1" />Number People: {reservation.people}</p>
         <p className="card-title" data-reservation-id-status={reservation.reservation_id}>Status: {reservation.status}</p>
-        <div className="btn-group" role="group" aria-label="Basic example">
-        
         {reservation.status === "seated" ? null : 
-            <Link to={`/reservations/${reservation.reservation_id}/seat`} className="btn btn-success">Seat</Link>
+            <Link to={`/reservations/${reservation.reservation_id}/seat`} className="btn btn-success m-1">Seat</Link>
           }
-          <Link to={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-secondary"> Edit</Link>
-          <button data-reservation-id-cancel={reservation.reservation_id} onClick={handleCancel} className="btn btn-danger">Cancel</button>
+          <Link to={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-secondary m-1"> Edit</Link>
+          <button data-reservation-id-cancel={reservation.reservation_id} onClick={handleCancel} className="btn btn-danger m-1">Cancel</button>
         </div>
-      </div>
     </div>
   );
 };

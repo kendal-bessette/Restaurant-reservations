@@ -8,6 +8,7 @@ import ListTables from "../tables/ListTables";
 import { formatDate } from "../utils/date-time";
 
 
+
 /**
  * Defines the dashboard page.
  * @param date
@@ -44,34 +45,40 @@ function Dashboard({ today }) {
 
   return (
     <main>
-      <h1 className="pt-4">Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for: {formatDate(date)}</h4>
-      </div>
+      <h1 className="pt-4 text-center">Dashboard</h1>
+        <h4 className="pt-2 pb-3 text-center">Reservations for: {formatDate(date)}</h4>
       <div>
-      <div className="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
+      <div className="btn-group d-flex mt-2 justify-content-center" role="group" aria-label="Basic example">
           <button type="button" className="btn btn-primary m-2" onClick={handlePrev}>
+          <span className="oi oi-arrow-circle-left mr-2" />
             Previous Day
           </button>
           <button type="button" className="btn btn-primary m-2" onClick={handleToday}>
+          <span className="oi oi-calendar mr-2" />
             Today
           </button>
           <button type="button" className="btn btn-primary m-2" onClick={handleTomorrow}>
             Next Day
+            <span className="oi oi-arrow-circle-right ml-2" />
           </button>
       </div>
       </div>
+
       <ErrorAlert error={reservationsError} />
-      {/* {JSON.stringify(reservations)} */}
-      <div className="card-group mt-4">
-        {!reservations ? <h4>Loading...</h4>
+
+      <h2 className="text-center pt-2">Reservations</h2>
+      {!reservations.length ? <h5 className="text-center pt-2">No Reservations for {formatDate(date)}</h5> : ""}
+
+      <div className="card-group mt-4 ">
+        {!reservations ? <h4>No Reservations</h4>
         :
         reservations.map((reservation) => (
           <ListReservations key={reservation.reservation_id} reservation={reservation} />
         ))}
         </div>
-        <div className="card-group mt-5">
-        {!tables ? <h4>Loading...</h4>
+        <h2 className="text-center pt-2">Tables</h2>
+        <div className="card-group mt-4 mb-4">
+        {!tables ? <h4>No Tables</h4>
         :
         tables.map((table) => (
           <ListTables key={table.table_id} table={table} />

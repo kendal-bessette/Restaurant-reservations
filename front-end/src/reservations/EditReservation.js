@@ -48,7 +48,7 @@ export default function EditReservation() {
 
   return (
     <>
-      <h2>Edit Reservation</h2>
+      <h1 className="pt-4 text-center">Edit Reservation</h1>
       <ErrorAlert error={reservationsError} />
       <ReservationForm
         reservation={oldReservation}
