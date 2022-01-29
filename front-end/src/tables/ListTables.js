@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import {
   deleteTable,
+  clearTable,
   updateReservationStatus,
   deleteReservationId,
 } from "../utils/api";
@@ -18,29 +19,21 @@ const ListTables = ({ table }) => {
         `Occupied by reservation ID: ${currentTable.reservation_id}`
       );
     } else {
-      setTableStatus("Free");
+      setTableStatus("free");
     }
   }, [currentTable]);
 
-  const handleFinish = (e) => {
-    e.preventDefault();
-    setError(null);
-    const confirmBox = window.confirm(
-      "Is this table ready to seat new guests? This cannot be undone."
-    );
-    if (confirmBox === true) {
-      updateReservationStatus(
-        { status: "finished" },
-        currentTable.reservation_id
-      ).catch(setError);
-      deleteReservationId(currentTable.table_id)
-        .then((response) => {
-          setCurrentTable(response);
-          history.go(0);
-        })
-        .catch(setError);
+  const handleFinish = async(event) => {
+    event.preventDefault()
+
+    if(window.confirm(
+      'Is this table ready to seat new guests? This cannot be undone.'
+    )){
+      clearTable(table.table_id).then(() => {
+        history.push('/')
+      }).catch((err) => console.error(err));
     }
-  };
+  }
 
   const handleDelete =(e) => {
     e.preventDefault();
