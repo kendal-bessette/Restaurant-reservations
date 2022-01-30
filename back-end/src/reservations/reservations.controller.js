@@ -70,12 +70,7 @@ const isValid = (req, res, next) => {
   if (date.valueOf() < currentDate.valueOf() && date.toUTCString().slice(0, 16) !== currentDate.toUTCString().slice(0, 16))
     return next({ status: 400, message: "Reservations must be made in the future!" });
 
-  if(dateIsTuesday(reservation_date)){
-    return next({
-      status: 400,
-      message: `Sorry closed on Tuesday!`
-    });
-  }
+
   if(beforeClosing(reservation_time)){
     return next({
       status: 400,
@@ -90,6 +85,19 @@ const isValid = (req, res, next) => {
   }
   next();
 };
+
+function notTuesday (req, res, next) {
+  const { reservation_date, reservation_time } = req.body.data
+  let day = new Date(`${reservation_date} ${reservation_time}`)
+  if (day.getDay() !== 2) {
+    next()
+  } else {
+    return next({
+      status: 400,
+      message: 'Restaurant is closed on Tuesdays, please select another day.'
+    })
+  }
+}
 
 async function reservationExists(req, res, next) {
   const { reservationId } = req.params;
@@ -164,7 +172,7 @@ async function updateStatus(req, res){
 
 module.exports = {
   list:[ asyncErrorBoundary(list) ],
-  create: [hasOnlyValidProperties, hasRequiredProperties, isValid, asyncErrorBoundary(create),],
+  create: [hasOnlyValidProperties, hasRequiredProperties, notTuesday, isValid, asyncErrorBoundary(create),],
   read: [asyncErrorBoundary(reservationExists) ,asyncErrorBoundary(read)],
   update:[asyncErrorBoundary(reservationExists),hasOnlyValidProperties, hasRequiredProperties, isValid, asyncErrorBoundary(update)],
   updateStatus: [asyncErrorBoundary(reservationExists), asyncErrorBoundary(validStatusUpdate), asyncErrorBoundary(updateStatus)]

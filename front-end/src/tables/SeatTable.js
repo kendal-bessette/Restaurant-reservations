@@ -90,14 +90,14 @@ const SeatTable = () => {
                 Name: {reservation.first_name} {reservation.last_name}
               </p>
               <p className="card-title">
-              <span class="oi oi-calendar mr-1"></span> Date: {formatDate(reservation.reservation_date)}</p>
-              <p className="card-title"><span class="oi oi-clock mr-1"></span>
+              <span className="oi oi-calendar mr-1"></span> Date: {formatDate(reservation.reservation_date)}</p>
+              <p className="card-title"><span className="oi oi-clock mr-1"></span>
                 Reservation Time: {formatTime(reservation.reservation_time)}
               </p>
               <p className="card-title">
-              <span class="oi oi-phone mr-1"></span>Mobile Number: {reservation.mobile_number}</p>
+              <span className="oi oi-phone mr-1"></span>Mobile Number: {reservation.mobile_number}</p>
               <p className="card-title">
-              <span class="oi oi-people mr-1"></span>Number People: {reservation.people}</p>
+              <span className="oi oi-people mr-1"></span>Number People: {reservation.people}</p>
               <p className="card-title" data-reservation-id-status={reservation.reservation_id}>Status: {reservation.status}</p>
               <div className="btn-group" role="group" aria-label="Basic example">
         </div>
