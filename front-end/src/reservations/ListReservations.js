@@ -34,7 +34,7 @@ const ListReservations = ({ reservation }) => {
           Name: {reservation.first_name} {reservation.last_name}
         </p>
         <p className="card-title">
-        <span className="oi oi-calendar mr-1" /> Date: {resDate}</p>
+        <span className="oi oi-calendar mr-1" /> Date: {formatDate(reservation.reservation_date)}</p>
         <p className="card-title"><span className="oi oi-clock mr-1" />
           Reservation Time: {formatTime(reservation.reservation_time)}
         </p>
