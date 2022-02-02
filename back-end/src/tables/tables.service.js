@@ -33,10 +33,18 @@ const clearTable = (tableId) => {
     .returning("*")
 };
 
+
+function deleteTable(table_id) {
+    return knex('tables')
+      .where({ table_id: table_id })
+      .del()
+  }
+
 module.exports = {
     list,
     create,
     update,
     read,
     clearTable,
+    deleteTable,
 }

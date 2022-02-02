@@ -6,7 +6,7 @@ function NewTable() {
   const history = useHistory();
   const [table_name, setTable_name] = useState("");
   const [capacity, setCapacity] = useState("");
-  const [newError, setNewError] = useState(null);
+  const [, setNewError] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();

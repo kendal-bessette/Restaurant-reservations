@@ -130,6 +130,25 @@ const clearTable = async(req, res, next) => {
     res.status(200).json({ data: clearedTable });
 }; 
 
+async function tablesExistsForDelete(req, res, next) {
+    const {data: {table_id}} = req.body;
+    const table = await TableService.read(table_id);
+    if (table) {
+      res.locals.table = table;
+      return next();
+    }
+    next({
+      status: 400,
+      message: `table '${table_id}' cannot be found.`
+    });
+  }
+
+async function deleteTable(req, res) {
+    const {data: {table_id}} = req.body;
+    await TableService.deleteTable(table_id);
+    res.status(200)
+  }
+
 module.exports = {
     list: [asyncErrorBoundary(list)],
     create: [asyncErrorBoundary(tableIsValid),
@@ -142,5 +161,6 @@ module.exports = {
              asyncErrorBoundary(update)],
     read: [asyncErrorBoundary(tableExists), 
            asyncErrorBoundary(read)],
-    delete: [asyncErrorBoundary(tableExists), asyncErrorBoundary(clearTable)]
+    delete: [asyncErrorBoundary(tableExists), asyncErrorBoundary(clearTable)],
+    deleteTable: [asyncErrorBoundary(asyncErrorBoundary(deleteTable)), asyncErrorBoundary(tablesExistsForDelete)]
 }

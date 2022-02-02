@@ -4,8 +4,7 @@ import { Link, useHistory } from "react-router-dom"
 import { cancelReservation } from "../utils/api";
 
 const ListReservations = ({ reservation }) => {
-  const resDate = formatDate(reservation.reservation_date);
-  const [reservationsError, setReservationsError] = useState(null)
+  const [, setReservationsError] = useState(null)
   const history = useHistory();
 
   const handleCancel = async(event) => {
