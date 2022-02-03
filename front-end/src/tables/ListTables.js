@@ -88,18 +88,18 @@ const ListTables = ({ table }) => {
                   {" "}
                   Free{" "}
                 </h4>
-              </>
-            )}
-            <div>
+                <div>
             <button
-                  data-table-id-finish={table.table_id}
-                  onClick={(e) => handleDelete(e)}
-                  className="btn btn-danger ml-2 mt-1"
-                >
-                  {" "}
-                  Delete Table{" "}
-                </button>
-            </div>
+            data-table-id-finish={table.table_id}
+            onClick={(e) => handleDelete(e)}
+            className="btn btn-danger ml-2 mt-1"
+          >
+            {" "}
+            Delete Table{" "}
+          </button>
+          </div>
+          </>
+            )}
           </div>
         </div>
       </div>
