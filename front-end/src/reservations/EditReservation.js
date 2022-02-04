@@ -10,6 +10,7 @@ export default function EditReservation() {
   const { reservation_id } = useParams();
   const [oldReservation, setOldReservation] = useState({});
   const [reservationsError, setReservationsError] = useState(null);
+
   useEffect(() => {
     const getReservation = async () => {
       const abortController = new AbortController();
@@ -42,7 +43,7 @@ export default function EditReservation() {
 
       history.push(`/dashboard?date=${oldReservation.reservation_date}`);
     } catch (err) {
-      setReservationsError(err);
+      setReservationsError({ message: "Seated reservations cannot be edited."});
     }
   };
 

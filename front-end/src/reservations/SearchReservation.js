@@ -14,18 +14,21 @@ const SearchReservation = () => {
 
   const handleSearch = async (event) => {
     event.preventDefault();
-
-    const abortController = new AbortController();
-
-    const reservationByNum = await listReservations(
-      mobileNumber,
-      abortController.signal
-    );
-    setReservations(reservationByNum);
-    if (reservationByNum.length === 0) {
-      setReservationsError({ message: "No reservations found" });
-    } else {
-      setReservationsError(null);
+    const abortController = new AbortController();    
+    try {
+      const reservationByNum = 
+      await listReservations(
+        mobileNumber,
+        abortController.signal
+      );
+      setReservations(reservationByNum);  
+      if (reservationByNum.length === 0) {
+        setReservationsError({ message: "No reservations found" });
+      } else {
+        setReservationsError(null);
+      }
+    } catch (error) {
+      console.error(setReservationsError); 
     }
   };
 

@@ -20,28 +20,34 @@ const ListTables = ({ table }) => {
   const handleFinish = async (event) => {
     event.preventDefault();
 
-    if (
-      window.confirm(
-        "Is this table ready to seat new guests? This cannot be undone."
-      )
-    ) {
-      clearTable(table.table_id)
-        .then(() => {
-          history.push("/");
-        })
-        .catch((error) => console.error(error));
+    try {
+      if (
+        window.confirm(
+          "Is this table ready to seat new guests? This cannot be undone."
+        )
+      ) {
+        clearTable(table.table_id)
+          .then(() => {
+            history.push("/");
+          })
+        }
+    } catch (error) {
+      console.error(error); 
     }
   };
 
   function handleDelete(e) {
     e.preventDefault(); 
-    if (window.confirm(
-      "Delete this table? You will not be able to recover it."
-      )
-      ) {
-        deleteTable(table.table_id)
-        history.go(0)
-        .catch((error) => console.error(error))
+    try {
+      if (window.confirm(
+        "Delete this table? You will not be able to recover it."
+        )
+        ) {
+          deleteTable(table.table_id)
+          history.go(0)
+        }
+    } catch (error) {
+      console.error(error); 
     }
   }
 
@@ -52,6 +58,7 @@ const ListTables = ({ table }) => {
         <div
           className="card text-center ml-2"
           style={{ maxWidth: "20rem", minHeight:"14rem", maxHeight: "18rem" }}
+          key={table.id}
         >
           <h4 className="card-header">{table.table_name}</h4>
           <div className="card-body">

@@ -18,16 +18,24 @@ const SeatTable = () => {
         const abortController = new AbortController();
 
         async function getTables(){
-            const tablesFromApi = await listTables(abortController.signal)
-            setTables(tablesFromApi)
+            try {
+                const tablesFromApi = await listTables(abortController.signal)
+                setTables(tablesFromApi)
+            } catch (error) {
+                console.error(error); 
+            }
         }
         
         async function getReservation(){
-            const response = await readReservation(reservation_id, abortController.signal)
-            if(response){
-                const reservationFromApi =  formatReservationDate(response)
-            setReservation(reservationFromApi);
-        }
+            try {
+                const response = await readReservation(reservation_id, abortController.signal)
+                if(response){
+                    const reservationFromApi =  formatReservationDate(response)
+                setReservation(reservationFromApi);
+            }
+            } catch (error) {
+                console.error(error); 
+            }
     }
         getReservation();
         getTables();

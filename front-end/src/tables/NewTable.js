@@ -15,11 +15,14 @@ function NewTable() {
       table_name,
       capacity,
     };
-    createTable(table)
+    try {
+      createTable(table)
       .then(() => {
         history.push("/dashboard");
       })
-      .catch(setNewError);
+    } catch (error) {
+      setNewError(error); 
+    }
   };
 
   const cancelHandler = (e) => {

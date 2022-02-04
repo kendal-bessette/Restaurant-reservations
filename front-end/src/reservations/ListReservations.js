@@ -22,7 +22,7 @@ const ListReservations = ({ reservation }) => {
   }
 
   return (
-    <div className="card text-center m-2 border" style={{ maxWidth: "50rem"}}>
+    <div className="card text-center m-2 border" style={{ maxWidth: "50rem"}} key={reservation.id}>
       <div className="card-header">
         <h5>
           {reservation.first_name} {reservation.last_name}, Party of {reservation.people}
