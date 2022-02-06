@@ -53,7 +53,7 @@ const SeatTable = () => {
             await updateTable(formData, {data: {reservation_id} })
             history.push(`/dashboard?date=${reservation.reservation_date}`)
         } catch(error) {
-            setTablesError(error)
+            setTablesError({ message: 'Table is occupied or reservation has surpassed capacity' })
         }
     }
 
@@ -85,7 +85,7 @@ const SeatTable = () => {
              <button className="btn btn-danger m-2" onClick={handleCancel}><span className="oi oi-ban" /> Cancel </button>
             </div>
         </form>
-        
+        <ErrorAlert error={tablesError}/>
         {reservation.reservation_id && (
             <div className="card text-center m-2 border" style={{ maxWidth: "50rem"}}>
             <div className="card-header">
@@ -113,7 +113,6 @@ const SeatTable = () => {
         </div>
         )}
         </div>
-        <ErrorAlert error={tablesError}/>
         </>
      );
 }
