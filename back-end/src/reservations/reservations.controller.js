@@ -47,6 +47,7 @@ const isValid = (req, res, next) => {
   const {data: {reservation_date, reservation_time, people, status}} = req.body;
   const date = new Date(reservation_date);
   const currentDate = new Date();
+  
   if(typeof people === 'string' && people > 0) {
     return next({
       status: 400,
@@ -77,6 +78,7 @@ const isValid = (req, res, next) => {
       message: `Sorry We are not open during this time`
     });
   }
+
   if(status === 'seated' || status === 'finished'){
     return next({
       status:400,
